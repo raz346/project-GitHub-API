@@ -1,14 +1,10 @@
 var request = require('request');
 var fs = require('fs');
-const config = require('./config.js')
+const config = require('./config.js');
 var GITHUB_USER = config.GITHUB_USER;
 var GITHUB_TOKEN = config.GITHUB_TOKEN;
 var repoOwner = process.argv[2] || "jquery";
 var repoName = process.argv[3] || "jquery";
-
-console.log(repoOwner, repoName)
-
-
 function getRepoContributors(repoOwner, repoName, cb) {
   var requestURL = 'https://' + GITHUB_USER + ':' + GITHUB_TOKEN + '@api.github.com/repos/' + repoOwner + '/' + repoName + '/contributors';
   //  define user-agent
