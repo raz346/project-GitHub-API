@@ -21,5 +21,11 @@ function getRepoContributors(repoOwner, repoName, cb) {
        })
 }
 getRepoContributors("jquery", "jquery", function(err, result) {
-  console.log(result.body);   
+   // get data as  object ??
+  var tempResult = JSON.parse(result.body);
+  // iterate over the results
+  tempResult.forEach(function (element){
+    // print each avatar
+    console.log(element["avatar_url"]);
+  });
 });
