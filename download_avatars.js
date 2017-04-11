@@ -1,7 +1,14 @@
 var request = require('request');
 var fs = require('fs');
-var GITHUB_USER = "raz346";
-var GITHUB_TOKEN = "b086bcc6763f5fbb966f33c90ec5f24e7a2dd019";
+const config = require('./config.js')
+var GITHUB_USER = config.GITHUB_USER;
+var GITHUB_TOKEN = config.GITHUB_TOKEN;
+var repoOwner = process.argv[2] || "jquery";
+var repoName = process.argv[3] || "jquery";
+
+console.log(repoOwner, repoName)
+
+
 function getRepoContributors(repoOwner, repoName, cb) {
   var requestURL = 'https://' + GITHUB_USER + ':' + GITHUB_TOKEN + '@api.github.com/repos/' + repoOwner + '/' + repoName + '/contributors';
   //  define user-agent
@@ -22,7 +29,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
         return response;
       });
 }
-getRepoContributors("jquery", "jquery", function(err, result) {
+getRepoContributors(repoOwner, repoName, function(err, result) {
    // get data as  object ??
   var tempResult = JSON.parse(result.body);
   // iterate over the results
