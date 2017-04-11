@@ -32,12 +32,12 @@ getRepoContributors(repoOwner, repoName, function(err, result) {
   try {
     tempResult.forEach(function (element){
     // invoke  downloadImageByURL and pass avatar url and loging info as arguments
-    downloadImageByURL(element["avatar_url"], element["login"] + ".jpg");
+      downloadImageByURL(element["avatar_url"], element["login"] + ".jpg");
     
     });
   } catch (err) {
-    console.log("you must input a user name and a repo name")
-    }
+    console.log("you must input a user name and a repo name");
+  }
 });
 function downloadImageByURL(url, filePath) {
   console.log('Downloading image...');
