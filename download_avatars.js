@@ -1,10 +1,10 @@
 var request = require('request');
 var fs = require('fs');
-const config = require('./config.js');
+var config = require('./config.js');
 var GITHUB_USER = config.GITHUB_USER;
 var GITHUB_TOKEN = config.GITHUB_TOKEN;
-var repoOwner = process.argv[2] || "jquery";
-var repoName = process.argv[3] || "jquery";
+var repoOwner = process.argv[2];
+var repoName = process.argv[3];
 function getRepoContributors(repoOwner, repoName, cb) {
   var requestURL = 'https://' + GITHUB_USER + ':' + GITHUB_TOKEN + '@api.github.com/repos/' + repoOwner + '/' + repoName + '/contributors';
   //  define user-agent
@@ -29,10 +29,15 @@ getRepoContributors(repoOwner, repoName, function(err, result) {
    // get data as  object ??
   var tempResult = JSON.parse(result.body);
   // iterate over the results
+  try {
   tempResult.forEach(function (element){
     // invoke  downloadImageByURL and pass avatar url and loging info as arguments
     downloadImageByURL(element["avatar_url"], element["login"] + ".jpg");
+    
   });
+  } catch (err) {
+    console.log("you must input a user name and a repo name")
+    }
 });
 function downloadImageByURL(url, filePath) {
   console.log('Downloading image...');
